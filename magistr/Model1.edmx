@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище TutoringCenterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="idActivty" />
+          </Key>
+          <Property Name="idActivty" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idSubject" Type="int" Nullable="false" />
+          <Property Name="data" Type="date" Nullable="false" />
+          <Property Name="time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" />
+          <Property Name="dayOfWeek" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="codeEmployee" />
+          </Key>
+          <Property Name="codeEmployee" Type="int" Nullable="false" />
+          <Property Name="fio" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateStartWork" Type="date" Nullable="false" />
+          <Property Name="salary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="numberPhone" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="position" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PositionList">
+          <Key>
+            <PropertyRef Name="idPosition" />
+          </Key>
+          <Property Name="idPosition" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="idStudent" />
+          </Key>
+          <Property Name="idStudent" Type="int" Nullable="false" />
+          <Property Name="fioStudent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fullNameOfTheParent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentActivity">
+          <Key>
+            <PropertyRef Name="idActivity" />
+            <PropertyRef Name="idStudent" />
+          </Key>
+          <Property Name="idActivity" Type="int" Nullable="false" />
+          <Property Name="idStudent" Type="int" Nullable="false" />
+          <Property Name="attendance" Type="nvarchar" MaxLength="50" />
+          <Property Name="reasonforAbsence" Type="nvarchar" MaxLength="50" />
+          <Property Name="PercentageOfEarnedMaterial" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="StudentOfWell">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStudent" Type="int" Nullable="false" />
+          <Property Name="idWell" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubjectOfWell">
+          <Key>
+            <PropertyRef Name="idSubject" />
+          </Key>
+          <Property Name="idSubject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idWell" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Well">
+          <Key>
+            <PropertyRef Name="idWell" />
+          </Key>
+          <Property Name="idWell" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="codeEmployee" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Activity_SubjectOfWell">
+          <End Role="SubjectOfWell" Type="Self.SubjectOfWell" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectOfWell">
+              <PropertyRef Name="idSubject" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="idSubject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentActivity_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="StudentActivity" Type="Self.StudentActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="idActivty" />
+            </Principal>
+            <Dependent Role="StudentActivity">
+              <PropertyRef Name="idActivity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentActivity_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentActivity" Type="Self.StudentActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="StudentActivity">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentOfWell_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentOfWell" Type="Self.StudentOfWell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="StudentOfWell">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentOfWell_Well">
+          <End Role="Well" Type="Self.Well" Multiplicity="1" />
+          <End Role="StudentOfWell" Type="Self.StudentOfWell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Well">
+              <PropertyRef Name="idWell" />
+            </Principal>
+            <Dependent Role="StudentOfWell">
+              <PropertyRef Name="idWell" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectOfWell_Well">
+          <End Role="Well" Type="Self.Well" Multiplicity="1" />
+          <End Role="SubjectOfWell" Type="Self.SubjectOfWell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Well">
+              <PropertyRef Name="idWell" />
+            </Principal>
+            <Dependent Role="SubjectOfWell">
+              <PropertyRef Name="idWell" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Well_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Well" Type="Self.Well" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="codeEmployee" />
+            </Principal>
+            <Dependent Role="Well">
+              <PropertyRef Name="codeEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудник_PositionList">
+          <End Role="PositionList" Type="Self.PositionList" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PositionList">
+              <PropertyRef Name="idPosition" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TutoringCenterModelContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PositionList" EntityType="Self.PositionList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentActivity" EntityType="Self.StudentActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentOfWell" EntityType="Self.StudentOfWell" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubjectOfWell" EntityType="Self.SubjectOfWell" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Well" EntityType="Self.Well" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Activity_SubjectOfWell" Association="Self.FK_Activity_SubjectOfWell">
+            <End Role="SubjectOfWell" EntitySet="SubjectOfWell" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentActivity_Activity" Association="Self.FK_StudentActivity_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="StudentActivity" EntitySet="StudentActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentActivity_Student" Association="Self.FK_StudentActivity_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentActivity" EntitySet="StudentActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentOfWell_Student" Association="Self.FK_StudentOfWell_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentOfWell" EntitySet="StudentOfWell" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentOfWell_Well" Association="Self.FK_StudentOfWell_Well">
+            <End Role="Well" EntitySet="Well" />
+            <End Role="StudentOfWell" EntitySet="StudentOfWell" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectOfWell_Well" Association="Self.FK_SubjectOfWell_Well">
+            <End Role="Well" EntitySet="Well" />
+            <End Role="SubjectOfWell" EntitySet="SubjectOfWell" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Well_Employee" Association="Self.FK_Well_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Well" EntitySet="Well" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудник_PositionList" Association="Self.FK_Сотрудник_PositionList">
+            <End Role="PositionList" EntitySet="PositionList" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TutoringCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="idActivty" />
+          </Key>
+          <Property Name="idActivty" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSubject" Type="Int32" Nullable="false" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dayOfWeek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SubjectOfWell" Relationship="Self.FK_Activity_SubjectOfWell" FromRole="Activity" ToRole="SubjectOfWell" />
+          <NavigationProperty Name="StudentActivity" Relationship="Self.FK_StudentActivity_Activity" FromRole="Activity" ToRole="StudentActivity" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="codeEmployee" />
+          </Key>
+          <Property Name="codeEmployee" Type="Int32" Nullable="false" />
+          <Property Name="fio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dateStartWork" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="salary" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="numberPhone" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="position" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Well" Relationship="Self.FK_Well_Employee" FromRole="Employee" ToRole="Well" />
+          <NavigationProperty Name="PositionList" Relationship="Self.FK_Сотрудник_PositionList" FromRole="Employee" ToRole="PositionList" />
+        </EntityType>
+        <EntityType Name="PositionList">
+          <Key>
+            <PropertyRef Name="idPosition" />
+          </Key>
+          <Property Name="idPosition" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Сотрудник_PositionList" FromRole="PositionList" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="idStudent" />
+          </Key>
+          <Property Name="idStudent" Type="Int32" Nullable="false" />
+          <Property Name="fioStudent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fullNameOfTheParent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="StudentActivity" Relationship="Self.FK_StudentActivity_Student" FromRole="Student" ToRole="StudentActivity" />
+          <NavigationProperty Name="StudentOfWell" Relationship="Self.FK_StudentOfWell_Student" FromRole="Student" ToRole="StudentOfWell" />
+        </EntityType>
+        <EntityType Name="StudentActivity">
+          <Key>
+            <PropertyRef Name="idActivity" />
+            <PropertyRef Name="idStudent" />
+          </Key>
+          <Property Name="idActivity" Type="Int32" Nullable="false" />
+          <Property Name="idStudent" Type="Int32" Nullable="false" />
+          <Property Name="attendance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reasonforAbsence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PercentageOfEarnedMaterial" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_StudentActivity_Activity" FromRole="StudentActivity" ToRole="Activity" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentActivity_Student" FromRole="StudentActivity" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="StudentOfWell">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStudent" Type="Int32" Nullable="false" />
+          <Property Name="idWell" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentOfWell_Student" FromRole="StudentOfWell" ToRole="Student" />
+          <NavigationProperty Name="Well" Relationship="Self.FK_StudentOfWell_Well" FromRole="StudentOfWell" ToRole="Well" />
+        </EntityType>
+        <EntityType Name="SubjectOfWell">
+          <Key>
+            <PropertyRef Name="idSubject" />
+          </Key>
+          <Property Name="idSubject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idWell" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_SubjectOfWell" FromRole="SubjectOfWell" ToRole="Activity" />
+          <NavigationProperty Name="Well" Relationship="Self.FK_SubjectOfWell_Well" FromRole="SubjectOfWell" ToRole="Well" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Well">
+          <Key>
+            <PropertyRef Name="idWell" />
+          </Key>
+          <Property Name="idWell" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="codeEmployee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Well_Employee" FromRole="Well" ToRole="Employee" />
+          <NavigationProperty Name="StudentOfWell" Relationship="Self.FK_StudentOfWell_Well" FromRole="Well" ToRole="StudentOfWell" />
+          <NavigationProperty Name="SubjectOfWell" Relationship="Self.FK_SubjectOfWell_Well" FromRole="Well" ToRole="SubjectOfWell" />
+        </EntityType>
+        <Association Name="FK_Activity_SubjectOfWell">
+          <End Role="SubjectOfWell" Type="Self.SubjectOfWell" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectOfWell">
+              <PropertyRef Name="idSubject" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="idSubject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentActivity_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="StudentActivity" Type="Self.StudentActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="idActivty" />
+            </Principal>
+            <Dependent Role="StudentActivity">
+              <PropertyRef Name="idActivity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Well_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Well" Type="Self.Well" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="codeEmployee" />
+            </Principal>
+            <Dependent Role="Well">
+              <PropertyRef Name="codeEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудник_PositionList">
+          <End Role="PositionList" Type="Self.PositionList" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PositionList">
+              <PropertyRef Name="idPosition" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentActivity_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentActivity" Type="Self.StudentActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="StudentActivity">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentOfWell_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentOfWell" Type="Self.StudentOfWell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="idStudent" />
+            </Principal>
+            <Dependent Role="StudentOfWell">
+              <PropertyRef Name="idStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentOfWell_Well">
+          <End Role="Well" Type="Self.Well" Multiplicity="1" />
+          <End Role="StudentOfWell" Type="Self.StudentOfWell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Well">
+              <PropertyRef Name="idWell" />
+            </Principal>
+            <Dependent Role="StudentOfWell">
+              <PropertyRef Name="idWell" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectOfWell_Well">
+          <End Role="Well" Type="Self.Well" Multiplicity="1" />
+          <End Role="SubjectOfWell" Type="Self.SubjectOfWell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Well">
+              <PropertyRef Name="idWell" />
+            </Principal>
+            <Dependent Role="SubjectOfWell">
+              <PropertyRef Name="idWell" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TutoringCenterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activity" EntityType="Self.Activity" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="PositionList" EntityType="Self.PositionList" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="StudentActivity" EntityType="Self.StudentActivity" />
+          <EntitySet Name="StudentOfWell" EntityType="Self.StudentOfWell" />
+          <EntitySet Name="SubjectOfWell" EntityType="Self.SubjectOfWell" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Well" EntityType="Self.Well" />
+          <AssociationSet Name="FK_Activity_SubjectOfWell" Association="Self.FK_Activity_SubjectOfWell">
+            <End Role="SubjectOfWell" EntitySet="SubjectOfWell" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentActivity_Activity" Association="Self.FK_StudentActivity_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="StudentActivity" EntitySet="StudentActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Well_Employee" Association="Self.FK_Well_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Well" EntitySet="Well" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудник_PositionList" Association="Self.FK_Сотрудник_PositionList">
+            <End Role="PositionList" EntitySet="PositionList" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentActivity_Student" Association="Self.FK_StudentActivity_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentActivity" EntitySet="StudentActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentOfWell_Student" Association="Self.FK_StudentOfWell_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentOfWell" EntitySet="StudentOfWell" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentOfWell_Well" Association="Self.FK_StudentOfWell_Well">
+            <End Role="Well" EntitySet="Well" />
+            <End Role="StudentOfWell" EntitySet="StudentOfWell" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectOfWell_Well" Association="Self.FK_SubjectOfWell_Well">
+            <End Role="Well" EntitySet="Well" />
+            <End Role="SubjectOfWell" EntitySet="SubjectOfWell" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TutoringCenterModelContainer" CdmEntityContainer="TutoringCenterEntities">
+          <EntitySetMapping Name="Activity">
+            <EntityTypeMapping TypeName="TutoringCenterModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="idActivty" ColumnName="idActivty" />
+                <ScalarProperty Name="idSubject" ColumnName="idSubject" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="dayOfWeek" ColumnName="dayOfWeek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="TutoringCenterModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="codeEmployee" ColumnName="codeEmployee" />
+                <ScalarProperty Name="fio" ColumnName="fio" />
+                <ScalarProperty Name="dateStartWork" ColumnName="dateStartWork" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="numberPhone" ColumnName="numberPhone" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="position" ColumnName="position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PositionList">
+            <EntityTypeMapping TypeName="TutoringCenterModel.PositionList">
+              <MappingFragment StoreEntitySet="PositionList">
+                <ScalarProperty Name="idPosition" ColumnName="idPosition" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="TutoringCenterModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="fioStudent" ColumnName="fioStudent" />
+                <ScalarProperty Name="fullNameOfTheParent" ColumnName="fullNameOfTheParent" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentActivity">
+            <EntityTypeMapping TypeName="TutoringCenterModel.StudentActivity">
+              <MappingFragment StoreEntitySet="StudentActivity">
+                <ScalarProperty Name="idActivity" ColumnName="idActivity" />
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="attendance" ColumnName="attendance" />
+                <ScalarProperty Name="reasonforAbsence" ColumnName="reasonforAbsence" />
+                <ScalarProperty Name="PercentageOfEarnedMaterial" ColumnName="PercentageOfEarnedMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentOfWell">
+            <EntityTypeMapping TypeName="TutoringCenterModel.StudentOfWell">
+              <MappingFragment StoreEntitySet="StudentOfWell">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+                <ScalarProperty Name="idWell" ColumnName="idWell" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubjectOfWell">
+            <EntityTypeMapping TypeName="TutoringCenterModel.SubjectOfWell">
+              <MappingFragment StoreEntitySet="SubjectOfWell">
+                <ScalarProperty Name="idSubject" ColumnName="idSubject" />
+                <ScalarProperty Name="idWell" ColumnName="idWell" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TutoringCenterModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Well">
+            <EntityTypeMapping TypeName="TutoringCenterModel.Well">
+              <MappingFragment StoreEntitySet="Well">
+                <ScalarProperty Name="idWell" ColumnName="idWell" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="codeEmployee" ColumnName="codeEmployee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

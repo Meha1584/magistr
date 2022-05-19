@@ -1,0 +1,81 @@
+﻿<Page x:Class="magistr.PageList.CheckInfoForTeacherPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:magistr.PageList"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="CheckInfoForTeacherPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal" Grid.Row="1">
+            <Label Content="Данные о студентах"/>
+            <DataGrid AutoGenerateColumns="False" Name="dataStudent" VerticalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ФИО" Width="*" Binding="{Binding FioStudent}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="ФИО родителей" Width="*" Binding="{Binding FullNameOfTheParent}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding NumberPhone}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Посещаемость" Width="*" Binding="{Binding Attendance}"/>
+                    <DataGridTextColumn Header="Причина отсутствия" Width="*" Binding="{Binding ReasonforAbsence}"/>
+                    <DataGridTextColumn Header="% усваемости" Width="*" Binding="{Binding PercentageOfEarnedMaterial}" />
+                    <DataGridTextColumn Header="Курс" Width="*" Binding="{Binding Title}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel HorizontalAlignment="Right">
+                <Button Content="Сохранить изменения" Click="SaveEdit"/>
+            </StackPanel>
+        </WrapPanel>
+        <Label Content="Преподаватель" Name="nameTeacher" Margin="20" FontSize="22"/>
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="20">
+            <Label Content="Выбор даты"/>
+            <ComboBox Name="checkDate" SelectionChanged="CheckItem"/>
+            <StackPanel Margin="0,10">
+                <Label Content="Поиск студента"/>
+                <TextBox Name="findTeacher" TextChanged="FindStudent"/>
+            </StackPanel>
+            <Label Content="Выбор курса"/>
+            <ComboBox Name="filterWell" SelectionChanged="FilterWell"/>
+        </StackPanel>
+        <WrapPanel Grid.Row="2" Height="200" Width="500" HorizontalAlignment="Left">
+            <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                <DataGrid AutoGenerateColumns="False" Name="dataWell" VerticalScrollBarVisibility="Auto" Width="300">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер курса" Width="*" Binding="{Binding idWell}"/>
+                        <DataGridTextColumn Header="Название курса" Width="*" Binding="{Binding title}"/>
+                        <DataGridTemplateColumn Width="*" Header="Просмотр">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Просмотреть" Click="CheckWell"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </WrapPanel>
+            <StackPanel Margin="10,0">
+                <Label Content="Поиск курса"/>
+                <TextBox Name="findWell" TextChanged="FilterTextString"/>
+            </StackPanel>
+        </WrapPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <StackPanel>
+                <Label Content="Описание занятия"/>
+                <TextBlock Name="descriptionActivity" TextWrapping="Wrap" Height="100" Background="White"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Margin="0,30">
+                <Button Content="Создать курс" Click="CreateWell"/>
+                <Button Content="Отчет" Click="CreateReport" Margin="0,10,0,0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

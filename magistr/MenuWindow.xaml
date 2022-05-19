@@ -1,0 +1,20 @@
+﻿<Window x:Class="magistr.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:magistr"
+        mc:Ignorable="d"
+        Title="MenuWindow" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Frame Name="frame" NavigationUIVisibility="Hidden"/>
+        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
+            <Image Source="/Resource/pngegg.png"  Width="100"/>
+            <Button Content="Выход" Click="Exit" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>

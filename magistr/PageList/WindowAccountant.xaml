@@ -1,0 +1,26 @@
+﻿<Page x:Class="magistr.PageList.WindowAccountant"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:magistr.PageList"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="WindowAccountant">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Menu HorizontalAlignment="Left" VerticalAlignment="Center">
+            <MenuItem Header="Просмотр">
+                <MenuItem Header="Преподаватели" Click="FrameTeacher"/>
+            </MenuItem>
+            <MenuItem Header="Отчеты" Click="CreateReportTeacher"/>
+        </Menu>
+        <Frame Grid.Row="1"  Name="frameAcc" NavigationUIVisibility="Hidden"/>
+        
+    </Grid>
+</Page>

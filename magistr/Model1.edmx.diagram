@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c5afec82d86f46e8bb4e08b38b1fba3a" Name="Diagram1">
+        <EntityTypeShape EntityType="TutoringCenterModel.Activity" Width="1.5" PointX="10.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringCenterModel.Employee" Width="1.5" PointX="2.125" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringCenterModel.PositionList" Width="1.5" PointX="3.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringCenterModel.Student" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringCenterModel.StudentActivity" Width="1.5" PointX="9.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringCenterModel.StudentOfWell" Width="1.5" PointX="6.375" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringCenterModel.SubjectOfWell" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringCenterModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutoringCenterModel.Well" Width="1.5" PointX="4.125" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="TutoringCenterModel.FK_Activity_SubjectOfWell" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringCenterModel.FK_StudentActivity_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringCenterModel.FK_Well_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringCenterModel.FK_Сотрудник_PositionList" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringCenterModel.FK_StudentActivity_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringCenterModel.FK_StudentOfWell_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringCenterModel.FK_StudentOfWell_Well" ManuallyRouted="false" />
+        <AssociationConnector Association="TutoringCenterModel.FK_SubjectOfWell_Well" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

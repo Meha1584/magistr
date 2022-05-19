@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:magistr"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="540">
+        Title="Авторизация" Height="450" Width="540">
     <Grid Background="#FBECAA">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

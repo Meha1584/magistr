@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище TutoringCenterModelContainer" CdmEntityContainer="TutoringCenterEntities">
+    <EntitySetMapping Name="Activity">
+      <EntityTypeMapping TypeName="TutoringCenterModel.Activity">
+        <MappingFragment StoreEntitySet="Activity">
+          <ScalarProperty Name="idActivty" ColumnName="idActivty" />
+          <ScalarProperty Name="idSubject" ColumnName="idSubject" />
+          <ScalarProperty Name="data" ColumnName="data" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="dayOfWeek" ColumnName="dayOfWeek" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="TutoringCenterModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="codeEmployee" ColumnName="codeEmployee" />
+          <ScalarProperty Name="fio" ColumnName="fio" />
+          <ScalarProperty Name="dateStartWork" ColumnName="dateStartWork" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="numberPhone" ColumnName="numberPhone" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="position" ColumnName="position" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PositionList">
+      <EntityTypeMapping TypeName="TutoringCenterModel.PositionList">
+        <MappingFragment StoreEntitySet="PositionList">
+          <ScalarProperty Name="idPosition" ColumnName="idPosition" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="TutoringCenterModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="fioStudent" ColumnName="fioStudent" />
+          <ScalarProperty Name="fullNameOfTheParent" ColumnName="fullNameOfTheParent" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentActivity">
+      <EntityTypeMapping TypeName="TutoringCenterModel.StudentActivity">
+        <MappingFragment StoreEntitySet="StudentActivity">
+          <ScalarProperty Name="idActivity" ColumnName="idActivity" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="attendance" ColumnName="attendance" />
+          <ScalarProperty Name="reasonforAbsence" ColumnName="reasonforAbsence" />
+          <ScalarProperty Name="PercentageOfEarnedMaterial" ColumnName="PercentageOfEarnedMaterial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentOfWell">
+      <EntityTypeMapping TypeName="TutoringCenterModel.StudentOfWell">
+        <MappingFragment StoreEntitySet="StudentOfWell">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="idWell" ColumnName="idWell" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubjectOfWell">
+      <EntityTypeMapping TypeName="TutoringCenterModel.SubjectOfWell">
+        <MappingFragment StoreEntitySet="SubjectOfWell">
+          <ScalarProperty Name="idSubject" ColumnName="idSubject" />
+          <ScalarProperty Name="idWell" ColumnName="idWell" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="TutoringCenterModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Well">
+      <EntityTypeMapping TypeName="TutoringCenterModel.Well">
+        <MappingFragment StoreEntitySet="Well">
+          <ScalarProperty Name="idWell" ColumnName="idWell" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="codeEmployee" ColumnName="codeEmployee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
